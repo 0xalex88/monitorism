@@ -57,7 +57,7 @@ func NewMonitor(ctx context.Context, log log.Logger, m metrics.Factory, cfg CLIC
 		return nil, fmt.Errorf("failed to bind to the OptimismPortal: %w", err)
 	}
 
-	l2OOAddress, err := optimismPortal.L2ORACLE(&bind.CallOpts{Context: ctx})
+	l2OOAddress, err := optimismPortal.L2Oracle(&bind.CallOpts{Context: ctx})
 	if err != nil {
 		return nil, fmt.Errorf("failed to query L2OO address: %w", err)
 	}
