@@ -1,9 +1,9 @@
 variable "REGISTRY" {
-  default = "us-docker.pkg.dev"
+  default = "${REGISTRY}"
 }
 
 variable "REPOSITORY" {
-  default = "oplabs-tools-artifacts/images"
+  default = "${IMAGE_NAME}"
 }
 
 variable "GIT_COMMIT" {
@@ -34,17 +34,5 @@ target "op-monitorism" {
     GITDATE = "${GIT_DATE}"
   }
   platforms = split(",", PLATFORMS)
-  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/op-monitorism:${tag}"]
+  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}:${tag}"]
 }
-
-target "op-defender" {
-  dockerfile = "Dockerfile"
-  context = "./op-defender"
-  args = {
-    GITCOMMIT = "${GIT_COMMIT}"
-    GITDATE = "${GIT_DATE}"
-  }
-  platforms = split(",", PLATFORMS)
-  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/op-defender:${tag}"]
-}
-
