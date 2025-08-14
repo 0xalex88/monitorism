@@ -36,3 +36,4 @@ jobs:
           IMAGE_NAME: ${{ env.IMAGE_NAME }}
         with:
           push: true
+          targets: op-monitorism
